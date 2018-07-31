@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home Page</title>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/5.2.0/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/5.2.0/firebase-auth.js"></script>
+    <script defer src="/__/firebase/5.2.0/firebase-database.js"></script>
+    <script defer src="/__/firebase/5.2.0/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/5.2.0/firebase-storage.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+    <base href="index.html">
+    <link rel="stylesheet" type="text/css" href="styles.css" media="screen">
+    <link href="https://fonts.googleapis.com/css?family=Gaegu" rel="stylesheet">
+    <style>
+        .colorWords{font-family: 'Gaegu', 'cursive';}
+        input{background-color: lightgray;}
+        header{background-color: burlywood;}
+        @media screen and (max-width: 600px){
+            .colorWords{font-size: 80%;}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#" class="active">Index</a>
+            <a href="boiler.html">Boiler</a>
+            <a href="issueForm.html">Form</a>
+            <a href="issueList.html">List</a>
+        </nav>
+        <h1 class="colorWords">------- Welcome to Homework 3 -------</h1>
+        <h2 class="colorWords">------- Homework 3 is an issue tracker -------</h2>
+    </header>
+    <form>
+        Username <br><input type="text"> Ex: <samp>BigBaller123</samp><br>
+        Password <br><input type="password"><br>
+        <input type="button" onclick="location.href='boiler.html'" value="Sign in">
+    </form>
+    <p>New to homework 3? <a href="signUp.html">Create Account</a></p>
+    <button id="testing" onclick="sayHi()">Button</button>
+</body>
+</html>

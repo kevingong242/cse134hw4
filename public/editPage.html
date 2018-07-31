@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="styles.css" media="screen">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<title>
+  Issue List
+</title>
+<style type="text/css">
+    #headerTitle{
+        background-color: darkslategray;
+        font-weight: bold;
+        color:white;
+        text-align: center;
+    }
+    
+    .odd{
+        background-color: lightgray;
+    }
+    .fas{
+        font-size: 50px;
+    }
+    
+    @media print{
+        #headerTitle{
+            background-color: white;
+            color:black;
+        }
+        nav{
+            visibility: hidden;
+        }
+        .odd{
+            background-color: white;
+        }
+        .formTable{
+            border: none;
+            border-style: hidden;
+        }
+        button{
+            visibility: hidden;
+        }
+        .fas{
+            visibility: hidden;
+        }
+    }
+</style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Index</a>
+        <a href="boiler.html">Boiler</a>
+        <a href="issueForm.html">Form</a>
+        <a href="#" class="active">List</a>
+    </nav>
+    <h1>Issue List</h1>
+    <table id="formTable" border="1">
+        <tr id="headerTitle">
+            <th>Issue Id</th>
+            <th>Issue Name</th>
+            <th>Issue Type</th>
+            <th>Issue Description</th>
+            <th>Resolved</th>
+        </tr>
+        <tr class="odd">
+            <td>1</td>
+            <td>MathML</td>
+            <td id="mathIssue" onclick="showImg(mathIssue)">Math tags</td>
+            <td>Math is not supported by a lot of different browser versions, so it appears as plain text. An alternatice to using math tags could be to use JavaScript to perform math operations</td>
+            <td><i class="fas fa-times-circle"></i></td>
+        </tr>
+        <tr class="even">
+            <td>2</td>
+            <td>HTML5</td>
+            <td id="bdiIssue" onclick="showImg(bdiIssue)">bdi tags</td>
+            <td>Gives a warning about not being supported in all browsers and consider using a polyfill. To fix this warning, an idea could be to include a CDN script and run a polyfill</td>
+            <td><i class="fas fa-times-circle"></i></td>
+        </tr>
+    </table>
+    <button id="addBtn" onclick="location.href='issueForm.html'">Add Issue</button>
+    <button type="submit" onclick="location.href='resolve.html'">Resolve Issue</button>
+    <button type="submit" onclick="location.href='delete.html'">Delete Issue</button>
+    <img id="imgHolder">
+    <script>
+        function showImg(imgChoice){
+            if(imgChoice.id === "mathIssue"){
+                imgHolder.setAttribute("src", "mathIssue.webp");
+                imgHolder.setAttribute("alt", "math tag issue");
+            }
+            if(imgChoice.id === "bdiIssue"){
+               imgHolder.setAttribute("src", "bdiIssue.svg");
+                imgHolder.setAttribute("alt", "bdi tag issue");
+            }
+        }
+    </script>
+    <noscript>
+        <h3>Oh no, your javascript appears to be off</h3>
+        <h4>Here are images of all the issues above</h4>
+        <img src="mathIssue.webp" alt="math tag issue">
+        <img src="bdiIssue.svg" alt="bdi tag issue">
+    </noscript>
+</body>
+</html>

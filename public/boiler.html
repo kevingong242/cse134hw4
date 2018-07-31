@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>
+  Boiler
+</title>
+<link rel="stylesheet" type="text/css" href="styles.css" media="screen">
+<style>
+    .boilerContent{border-style:groove;}
+    h4{margin-bottom:0;}
+    h1{font-size: 50px;}
+    .fas fa-bug{font-size: 50px;}
+    @media print{
+        nav{
+            visibility: hidden;
+        }
+        .fas fa-bug{
+            font-size: 15pt;
+        }
+        button{
+            display: none;
+        }
+        h1{
+            font-size: 15pt;
+        }
+        h4{
+            font-size: 11pt;
+        }
+    }
+    
+</style>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Index</a>
+        <a href="#" class="active">Boiler</a>
+        <a href="issueForm.html">Form</a>
+        <a href="issueList.html">List</a>    
+    </nav>
+    <div>
+        <h1>
+            <i class="fas fa-bug"></i>
+            About Page
+        </h1>
+    </div>
+    <article class="boilerContent">
+        The purpose of this website is to track the bugs that have found by running tests on various tag elements using different browsers.
+        <br>
+        <h4>Here is an example of a filled out issue form that is ready to be added to a list.</h4>
+        <img src="addIssue.png" alt="Filled out issue form">
+        <p>
+            The form above will create an issue form for old tags with a description of its issue found while using it.
+        </p>
+        <br>
+        <button type="button" onclick="location.href='issueForm.html'">Click here to add an issue</button>
+    </article>
+</body>
+</html>

@@ -1,0 +1,33 @@
+body{
+    margin: 0;
+}
+
+nav{
+    background-color:#5f5f5f;
+    padding: 10px 0px;
+}
+
+nav a{
+    color:white;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+}
+
+a:hover:not(.active) {
+    background-color: darkslategray;
+    color:white;
+}
+
+.active{
+    background-color: #4CAF50;
+}
+
+.colorWords{
+    text-align: center;
+}
+
+article{
+    background-color: cadetblue;
+}
