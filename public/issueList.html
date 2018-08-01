@@ -65,23 +65,7 @@
     <h1>Issue List</h1>
     <div id="tableHolder">
     </div>
-    <!--
-    <table id="formTable" border="1">
-        <tr id="headerTitle">
-            <th>Issue Id</th>
-            <th>Issue Name</th>
-            <th>Issue Type</th>
-            <th>Issue Description</th>
-            <th>Resolved</th>
-            <th>Delete</th>
-            <th>Edit</th>
-        </tr>
-    </table>
-    -->
     <button id="addBtn" onclick="addIssue()">Add Issue</button>
-    <!--
-    <p><b>Click on an Issue type to see an image of the issue</b></p>
-    -->
     <div id="msgHolder"></div>
     <div>
         <img id="imgHolder">
@@ -104,12 +88,6 @@
         </form>
         <button id="submitBtn" onclick="editSubmit()">Submit</button>
     </div>
-    <div id="testArea">
-    </div>
-    <button onclick="sendGet()">Get</button>
-    <button onclick="sendPost()">Post</button>
-    <button onclick="sendPut()">Put</button>
-    <button onclick="sendDelete()">Delete</button>
     <script>
         function showImg(imgChoice){
             if(imgChoice.id === "mathIssue"){
