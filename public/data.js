@@ -80,7 +80,6 @@ function handleResponse(xhr){
                 <th>Edit</th>
             </tr>
         `;
-        //var table = document.getElementById('formTable');
         for(var x in jsonData){
             finalTable +=`
             <tr id="${jsonData[x].id}">
@@ -93,8 +92,6 @@ function handleResponse(xhr){
             <td class="editCell" onclick="editIssue(${jsonData[x].id})"></td>
             </tr>
             `;
-            //node.setAttribute('id', jsonData[x].id);
-            //table.appendChild(node);
         }
         finalTable += "</table>";
         document.getElementById('tableHolder').innerHTML = finalTable;
@@ -122,22 +119,6 @@ function addSubmit(){
         resolved: false
     };
     sendPost(issue);
-    /*
-    var node = document.createElement('tr');
-    node.innerHTML=`
-            <tr>
-            <td>${issue.id}</td>
-            <td>${issue.name}</td>
-            <td>${issue.type}</td>
-            <td>${issue.description}</td>
-            <td id="resolve"><i class="fas fa-times-circle" onclick="resolveIssue(${issue.resolved})"></i></td>
-            <td class="deleteCell" onclick="deleteIssue(${issue.id})"></td>
-            <td class="editCell" onclick="editIssue(${issue.id})"></td>
-            </tr>
-    `;
-    node.setAttribute('id', issue.id);
-    table.appendChild(node);
-    */
     document.getElementById('addHolder').style.visibility = "hidden";
 }
 
@@ -160,15 +141,9 @@ function editSubmit(){
         description: description
     };
     sendPut(issue, url + count);
-    if(name != ""){
-        row.children[1].textContent = name;
-    }
-    if(type != ""){
-        row.children[2].textContent = type;
-    }
-    if(description != ""){
-        row.children[3].textContent = description;
-    }
+    row.children[1].textContent = name;
+    row.children[2].textContent = type;
+    row.children[3].textContent = description;
     document.getElementById('editHolder').style.visibility = "hidden";
     
 }
@@ -176,16 +151,12 @@ function editSubmit(){
 function deleteIssue(id){
     var parent = document.querySelector('tbody');
     var row;
-    //console.log(document.querySelector('tbody').children);
     for(var x in parent.children){
-        //console.log(parent.children[x].id);
         if(parent.children[x].id == id){
             row = parent.children[x];
         }
     }
-    //console.log("ID: " + id);
     parent.removeChild(row);
-    //parent.deleteRow(id);
     sendDelete(url + id);
 }
 
