@@ -53,20 +53,42 @@ function createXHR(){
 function sendGet(){
     var xhr = createXHR();
     if(xhr){
-        xhr.open("GET", "http://localhost:3000/test", true);
+        xhr.open("GET", "http://localhost:3000/issue", true);
         xhr.onreadystatechange = function() {handleResponse(xhr);};
         xhr.send(null);
     }
 }
 
 function sendPost(){
-    var payload = "this is a test payload";
+    var sample = "sampleText"
+    var payload = "name=" + sample + "&type=typeTest";
     var xhr = new XMLHttpRequest();
     if(xhr){
-        xhr.open("POST", "http://localhost:3000/posts/apple", true);
+        xhr.open("POST", "http://localhost:3000/issue", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function(){handleResponse(xhr);};
         xhr.send(payload);
+    }
+}
+
+function sendPut(){
+    var payload = "name=changed&type=changed also";
+    var xhr = new XMLHttpRequest();
+    if(xhr){
+        xhr.open("PUT", "http://localhost:3000/issue/1", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {handleResponse(xhr);};
+        xhr.send(payload);
+    }
+}
+
+function sendDelete(){
+    var xhr = new XMLHttpRequest();
+    if(xhr){
+        xhr.open("DELETE", "http://localhost:3000/issue/1", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {handleResponse(xhr);};
+        xhr.send(null);
     }
 }
 
@@ -74,7 +96,7 @@ function handleResponse(xhr){
     if(xhr.readyState == 4 && xhr.status == 200){
         var data = xhr.responseText;
         var jsonResponse = JSON.parse(data);
-        console.log(jsonResponse[0].name);
+        console.log(jsonResponse[0]);
     }
 }
 
