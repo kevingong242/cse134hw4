@@ -40,12 +40,33 @@ var data =
 
 
 //REST functions
-function testGet(){
-    var xhr = new XMLHttpRequest();
+function createXHR(){
+    try {return new XMLHttpRequest(); } catch (e) {}
+    try {return new ActiveXObject("Msxml2.XMLHTTP.6.0"); } catch (e) {}
+    try {return new ActiveXObject("Msxml2.XMLHTTP.3.0"); } catch (e) {}
+    try {return new ActiveXObject("Msxml2.XMLHTTP"); } catch (e) {}
+    try {return new ActiveXObject("Microsoft.XMLHTTP"); } catch (e) {}
+        
+    return null;
+}
+
+function sendGet(){
+    var xhr = createXHR();
     if(xhr){
         xhr.open("GET", "http://localhost:3000/test", true);
         xhr.onreadystatechange = function() {handleResponse(xhr);};
         xhr.send(null);
+    }
+}
+
+function sendPost(){
+    var payload = "this is a test payload";
+    var xhr = new XMLHttpRequest();
+    if(xhr){
+        xhr.open("POST", "http://localhost:3000/posts/apple", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function(){handleResponse(xhr);};
+        xhr.send(payload);
     }
 }
 
