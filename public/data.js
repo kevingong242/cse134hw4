@@ -37,6 +37,28 @@ var data =
         description: 'More description'
     }];
 */
+
+
+//REST functions
+function testGet(){
+    var xhr = new XMLHttpRequest();
+    if(xhr){
+        xhr.open("GET", "http://localhost:3000/test", true);
+        xhr.onreadystatechange = function() {handleResponse(xhr);};
+        xhr.send(null);
+    }
+}
+
+function handleResponse(xhr){
+    if(xhr.readyState == 4 && xhr.status == 200){
+        var data = xhr.responseText;
+        var jsonResponse = JSON.parse(data);
+        console.log(jsonResponse[0].name);
+    }
+}
+
+
+//CRUD functions
 function addIssue(){
     document.getElementById('addHolder').style.visibility = "visible";
     document.getElementById('addName').value = "";
