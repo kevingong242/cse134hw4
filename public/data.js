@@ -1,4 +1,6 @@
 //Fake issue database
+var data = [];
+/*
 var data = 
     [{
         id: 1,
@@ -34,54 +36,73 @@ var data =
         type: 'More types',
         description: 'More description'
     }];
-
+*/
 function addIssue(){
+    document.getElementById('addHolder').style.visibility = "visible";
+    document.getElementById('addName').value = "";
+    document.getElementById('addType').value = "";
+    document.getElementById('addDescription').value = "";
+}
+
+function addSubmit(){
+    const issue = {
+        id: data.length,
+        name: document.getElementById('addName').value,
+        type: document.getElementById('addType').value,
+        description: document.getElementById('addDescription').value
+    };
+    data.push(issue);
     var table = document.getElementById('formTable');
     var node = document.createElement('tr');
-    var count = table.childElementCount - 1;
-    var classColor = document.createAttribute('class');
-    if(count < data.length){
-        node.innerHTML=`
+    node.innerHTML=`
             <tr>
-            <td>${data[count].id}</td>
-            <td>${data[count].name}</td>
-            <td>${data[count].type}</td>
-            <td>${data[count].description}</td>
+            <td>${issue.id}</td>
+            <td>${issue.name}</td>
+            <td>${issue.type}</td>
+            <td>${issue.description}</td>
             <td id="resolve"><i class="fas fa-times-circle" onclick="resolveIssue()"></i></td>
-            <td class="deleteCell" onclick="deleteIssue(${count})"></td>
-            <td class="editCell" onclick="editIssue(${count})"></td>
+            <td class="deleteCell" onclick="deleteIssue(${issue.id})"></td>
+            <td class="editCell" onclick="editIssue(${issue.id})"></td>
             </tr>
-        `;
-        node.setAttribute('id', count);
-        if(count % 2){
-            node.setAttribute('class', 'odd');
-        }
-        table.appendChild(node);
-    }else{
-        var msg = `<p>There are no more issues in the database to show</p>`;
-        var msgHolder = document.getElementById('msgHolder');
-        msgHolder.innerHTML = msg;
-    }
+    `;
+    node.setAttribute('id', issue.id);
+    console.log(node);
+    document.getElementById('addHolder').style.visibility = "hidden";
 }
 
-function deleteIssue(count){
-    var row = document.getElementById(count);
-    var parent = document.getElementById('formTable');
-    parent.removeChild(row);
-}
-
-function editIssue(count){
+function editIssue(id){
     document.getElementById('editHolder').style.visibility = "visible";
-    document.getElementById('editHolder').children[1].setAttribute('id', count);
+    var row = document.getElementById(id);
+    var count = 0;
+    for(x in data){
+        if(x.name == id){
+            break;
+        }
+        count++;
+    }
+    
+    document.getElementById('editHolder').children[1].setAttribute('id', id);
+    document.getElementById('editName').value = data[id].name; 
+    document.getElementById('editType').value = data[id].type;
+    document.getElementById('editDescription').value = data[id].description;
 }
 
 function editSubmit(){
-    var form = document.querySelector('form');
+    var form = document.querySelectorAll('form')[1];
+    console.log(form);
     var count = form.attributes[0].value;
     var row = document.getElementById(count);
-    var name = document.getElementById('name').value;
-    var type = document.getElementById('type').value;
-    var description = document.getElementById('description').value;
+    var name = document.getElementById('editName').value;
+    var type = document.getElementById('editType').value;
+    var description = document.getElementById('editDescription').value;
+    
+    var count = 0;
+    for(x in data){
+        if(x.name == name){
+            break;
+        }
+        count++;
+    }
     if(name != ""){
         row.children[1].textContent = name;
     }
@@ -91,8 +112,19 @@ function editSubmit(){
     if(description != ""){
         row.children[3].textContent = description;
     }
+    data[id].name = name;
+    data[id].type = type;
+    data[id].description = description;
     document.getElementById('editHolder').style.visibility = "hidden";
     
+}
+
+function deleteIssue(id){
+    var row = document.getElementById(id);
+    var parent = document.getElementById('formTable');
+    var test = document.querySelectorAll('tr');
+    data.splice(id, 1);
+    parent.removeChild(row);
 }
 
 function resolveIssue(){

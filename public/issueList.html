@@ -74,18 +74,28 @@
         </tr>
     </table>
     <button id="addBtn" onclick="addIssue()">Add Issue</button>
-    <button type="submit" onclick="location.href='resolve.html'">Resolve Issue</button>
+    <!--
     <p><b>Click on an Issue type to see an image of the issue</b></p>
+    -->
     <div id="msgHolder"></div>
     <div>
         <img id="imgHolder">
     </div>
+    <div id="addHolder" style="visibility:hidden">
+        <b>Add Issue</b>
+        <form>
+            Name: <input id="addName"><br>
+            Type: <input id="addType"><br>
+            Description: <input id="addDescription"><br>
+        </form>
+        <button onclick="addSubmit()">Submit</button>
+    </div>
     <div id="editHolder" style="visibility:hidden">
         <b>Edit Issue</b>
         <form>
-            Name: <input id="name"><br>
-            Type: <input id="type"><br>
-            Description: <input id="description"><br>
+            Name: <input id="editName"><br>
+            Type: <input id="editType"><br>
+            Description: <input id="editDescription"><br>
         </form>
         <button id="submitBtn" onclick="editSubmit()">Submit</button>
     </div>
