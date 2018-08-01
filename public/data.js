@@ -1,5 +1,6 @@
-//Fake issue database
-var data = [];
+const url = "http://localhost:3000/issue/";
+
+window.addEventListener('DOMContentLoaded', function(){sendGet();});
 
 //REST functions
 function createXHR(){
@@ -15,7 +16,7 @@ function createXHR(){
 function sendGet(){
     var xhr = createXHR();
     if(xhr){
-        xhr.open("GET", "http://localhost:3000/issue", true);
+        xhr.open("GET", url, true);
         xhr.onreadystatechange = function() {handleResponse(xhr);};
         xhr.send(null);
     }
@@ -23,12 +24,14 @@ function sendGet(){
 
 function sendPost(issue){
     var payload = "name=" + issue.name + "&type=" + issue.type + "&description=" + issue.description + "&resolved=" + issue.resolved;
-    
     var xhr = new XMLHttpRequest();
     if(xhr){
         xhr.open("POST", "http://localhost:3000/issue", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function(){handleResponse(xhr);};
+        xhr.onload = function(){
+            sendGet();
+        };
         xhr.send(payload);
     }
 }
@@ -40,6 +43,9 @@ function sendPut(issue, url){
         xhr.open("PUT", url, true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function() {handleResponse(xhr);};
+        xhr.onload = function() {
+          sendGet();  
+        };
         xhr.send(payload);
     }
 }
@@ -50,6 +56,9 @@ function sendDelete(url){
         xhr.open("DELETE", url, true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function() {handleResponse(xhr);};
+        xhr.onload = function(){
+            sendGet();
+        }
         xhr.send(null);
     }
 }
@@ -57,10 +66,39 @@ function sendDelete(url){
 function handleResponse(xhr){
     if(xhr.readyState == 4 && xhr.status == 200){
         var data = xhr.responseText;
-        var output = document.getElementById('testArea');
-        output.innerHTML = data;
-        //var jsonResponse = JSON.parse(data);
-        //console.log(jsonResponse[0]);
+        var jsonData = JSON.parse(data);
+        console.log("Recreating the whole table");
+        let finalTable = `
+        <table id="formTable" border="1">
+            <tr id="headerTitle">
+                <th>Issue Id</th>
+                <th>Issue Name</th>
+                <th>Issue Type</th>
+                <th>Issue Description</th>
+                <th>Resolved</th>
+                <th>Delete</th>
+                <th>Edit</th>
+            </tr>
+        `;
+        //var table = document.getElementById('formTable');
+        for(var x in jsonData){
+            finalTable +=`
+            <tr id="${jsonData[x].id}">
+            <td>${jsonData[x].id}</td>
+            <td>${jsonData[x].name}</td>
+            <td>${jsonData[x].type}</td>
+            <td>${jsonData[x].description}</td>
+            <td><i class="fas fa-times-circle" onclick="resolveIssue(${jsonData[x].id}, ${jsonData[x].resolved})"></i></td>
+            <td class="deleteCell" onclick="deleteIssue(${jsonData[x].id})"></td>
+            <td class="editCell" onclick="editIssue(${jsonData[x].id})"></td>
+            </tr>
+            `;
+            //node.setAttribute('id', jsonData[x].id);
+            //table.appendChild(node);
+        }
+        finalTable += "</table>";
+        document.getElementById('tableHolder').innerHTML = finalTable;
+        
     }
 }
 
@@ -74,16 +112,17 @@ function addIssue(){
 }
 
 function addSubmit(){
+    var table = document.getElementById('formTable');
+    var tableSize = table.children.length;
     const issue = {
-        id: data.length+1,
+        id: tableSize,
         name: document.getElementById('addName').value,
         type: document.getElementById('addType').value,
         description: document.getElementById('addDescription').value,
         resolved: false
     };
     sendPost(issue);
-    data.push(issue);
-    var table = document.getElementById('formTable');
+    /*
     var node = document.createElement('tr');
     node.innerHTML=`
             <tr>
@@ -98,7 +137,7 @@ function addSubmit(){
     `;
     node.setAttribute('id', issue.id);
     table.appendChild(node);
-    //console.log(node);
+    */
     document.getElementById('addHolder').style.visibility = "hidden";
 }
 
@@ -106,13 +145,6 @@ function editIssue(id){
     document.getElementById('editHolder').style.visibility = "visible";
     var row = document.getElementById(id);
     document.getElementById('editHolder').children[1].setAttribute('id', id);
-    
-    
-    /*
-    document.getElementById('editName').value = data[id-1].name; 
-    document.getElementById('editType').value = data[id-1].type;
-    document.getElementById('editDescription').value = data[id-1].description;
-    */
 }
 
 function editSubmit(){
@@ -127,8 +159,7 @@ function editSubmit(){
         type: type,
         description: description
     };
-    var url = "http://localhost:3000/issue/" + count;
-    sendPut(issue, url);
+    sendPut(issue, url + count);
     if(name != ""){
         row.children[1].textContent = name;
     }
@@ -138,27 +169,22 @@ function editSubmit(){
     if(description != ""){
         row.children[3].textContent = description;
     }
-    /*
-    data[id].name = name;
-    data[id].type = type;
-    data[id].description = description;
-    */
     document.getElementById('editHolder').style.visibility = "hidden";
     
 }
 
 function deleteIssue(id){
-    var row = document.getElementById(id);
-    var parent = document.getElementById('formTable');
-    var test = document.querySelectorAll('tr');
-    data.splice(id, 1);
-    var url = "http://localhost:3000/issue/" + id;
-    sendDelete(url);
+    var parent = document.querySelector('tbody');
+    console.log(document.querySelector('tbody').children[id]);
+    var row = parent.children[id];
+    console.log("ID: " + id);
     parent.removeChild(row);
+    //parent.deleteRow(id);
+    sendDelete(url + id);
 }
 
-function resolveIssue(resolved){
-    var block = document.getElementById('resolve');
+function resolveIssue(id, resolved){
+    var block = document.getElementsByClassName('fas');
     /*
     var count = block.parentElement.id;
     var url = "http://localhost:3000/issue/" + count;
@@ -171,10 +197,11 @@ function resolveIssue(resolved){
     }
     //sendPut(issue, url);
     */
-    var name = block.childNodes[0].className;
+    console.log(block[id]);
+    var name = block[id-1].className;
     if(name == "fas fa-times-circle"){
-        block.childNodes[0].className = "fas fa-check-circle";
+        block[id-1].className = "fas fa-check-circle";
     }else{
-        block.childNodes[0].className = "fas fa-times-circle"
+        block[id-1].className = "fas fa-times-circle"
     }
 }
