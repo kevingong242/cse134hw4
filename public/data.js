@@ -66,7 +66,8 @@ function addSubmit(){
             </tr>
     `;
     node.setAttribute('id', issue.id);
-    console.log(node);
+    table.appendChild(node);
+    //console.log(node);
     document.getElementById('addHolder').style.visibility = "hidden";
 }
 
