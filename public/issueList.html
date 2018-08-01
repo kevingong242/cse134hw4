@@ -5,6 +5,7 @@
 <title>
   Issue List
 </title>
+<script src="data.js"></script>
 <link rel="stylesheet" type="text/css" href="styles.css" media="screen">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 <style type="text/css">
@@ -21,6 +22,14 @@
     .fas{
         font-size: 50px;
     }
+    .deleteCell:hover{
+        background-color:darkcyan;
+    }
+    
+    .editCell:hover{
+        background-color: darkcyan;
+    }
+    
     @media print{
         #headerTitle{
             background-color: white;
@@ -60,35 +69,35 @@
             <th>Issue Type</th>
             <th>Issue Description</th>
             <th>Resolved</th>
-        </tr>
-        <tr class="odd">
-            <td>1</td>
-            <td>MathML</td>
-            <td id="mathIssue" onclick="showImg(mathIssue)">Math tags</td>
-            <td>Math is not supported by a lot of different browser versions, so it appears as plain text. An alternatice to using math tags could be to use JavaScript to perform math operations</td>
-            <td><i class="fas fa-times-circle"></i></td>
-        </tr>
-        <tr class="even">
-            <td>2</td>
-            <td>HTML5</td>
-            <td id="bdiIssue" onclick="showImg(bdiIssue)">bdi tags</td>
-            <td>Gives a warning about not being supported in all browsers and consider using a polyfill. To fix this warning, an idea could be to include a CDN script and run a polyfill</td>
-            <td><i class="fas fa-times-circle"></i></td>
-        </tr>
-        <tr class="odd">
-            <td>3</td>
-            <td>Old Tags</td>
-            <td id="marqueeIssue" onclick="showImg(marqueeIssue)">marquee and applet</td>
-            <td>Marquee tags are no longer supported as developers prefer that animation be apart of CSS rather than HTML. Applet tags are also outdated but still work on Firefox and earlier IE version. Instead of using the applet tags, it is recommended to use embed or object tags</td>
-            <td><i class="fas fa-times-circle"></i></td>
+            <th>Delete</th>
+            <th>Edit</th>
         </tr>
     </table>
-    <button id="addBtn" onclick="location.href='issueForm.html'">Add Issue</button>
-    <button type="submit" onclick="location.href='resolve.html'">Resolve Issue</button>
-    <button type="submit" onclick="location.href='delete.html'">Delete Issue</button>
+    <button id="addBtn" onclick="addIssue()">Add Issue</button>
+    <!--
     <p><b>Click on an Issue type to see an image of the issue</b></p>
+    -->
+    <div id="msgHolder"></div>
     <div>
         <img id="imgHolder">
+    </div>
+    <div id="addHolder" style="visibility:hidden">
+        <b>Add Issue</b>
+        <form>
+            Name: <input id="addName"><br>
+            Type: <input id="addType"><br>
+            Description: <input id="addDescription"><br>
+        </form>
+        <button onclick="addSubmit()">Submit</button>
+    </div>
+    <div id="editHolder" style="visibility:hidden">
+        <b>Edit Issue</b>
+        <form>
+            Name: <input id="editName"><br>
+            Type: <input id="editType"><br>
+            Description: <input id="editDescription"><br>
+        </form>
+        <button id="submitBtn" onclick="editSubmit()">Submit</button>
     </div>
     <script>
         function showImg(imgChoice){
