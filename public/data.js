@@ -175,9 +175,15 @@ function editSubmit(){
 
 function deleteIssue(id){
     var parent = document.querySelector('tbody');
-    console.log(document.querySelector('tbody').children[id]);
-    var row = parent.children[id];
-    console.log("ID: " + id);
+    var row;
+    //console.log(document.querySelector('tbody').children);
+    for(var x in parent.children){
+        //console.log(parent.children[x].id);
+        if(parent.children[x].id == id){
+            row = parent.children[x];
+        }
+    }
+    //console.log("ID: " + id);
     parent.removeChild(row);
     //parent.deleteRow(id);
     sendDelete(url + id);
