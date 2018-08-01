@@ -67,7 +67,6 @@ function handleResponse(xhr){
     if(xhr.readyState == 4 && xhr.status == 200){
         var data = xhr.responseText;
         var jsonData = JSON.parse(data);
-        console.log("Recreating the whole table");
         let finalTable = `
         <table id="formTable" border="1">
             <tr id="headerTitle">
@@ -162,19 +161,6 @@ function deleteIssue(id){
 
 function resolveIssue(id, resolved){
     var block = document.getElementsByClassName('fas');
-    /*
-    var count = block.parentElement.id;
-    var url = "http://localhost:3000/issue/" + count;
-    if(!resolved){
-        block.childNodes[0].className = "fas fa-check-circle";
-        //resolved = true;
-    }else{
-        block.childNodes[0].className = "fas fa-times-circle";
-        //issue.resolved = false;
-    }
-    //sendPut(issue, url);
-    */
-    console.log(block[id]);
     var name = block[id-1].className;
     if(name == "fas fa-times-circle"){
         block[id-1].className = "fas fa-check-circle";
