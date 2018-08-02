@@ -5,12 +5,43 @@
 <title>
   Boiler
 </title>
-<link rel="stylesheet" type="text/css" href="styles.css" media="screen">
+<link rel="stylesheet" type="text/css" media="screen">
 <style>
     .boilerContent{border-style:groove;}
     h4{margin-bottom:0;}
     h1{font-size: 50px;}
     .fas fa-bug{font-size: 50px;}
+    body{margin: 0;}
+
+    nav{
+        background-color:#5f5f5f;
+        padding: 10px 0px;
+    }
+
+    nav a{
+        color:white;
+        font-weight: bold;
+        text-align: center;
+        padding: 10px;
+        text-decoration: none;
+    }
+
+    a:hover:not(.active) {
+        background-color: darkslategray;
+        color:white;
+    }
+
+    .active{
+        background-color: #4CAF50;
+    }
+
+    .colorWords{
+        text-align: center;
+    }
+
+    article{
+        background-color: cadetblue;
+    }
     @media print{
         nav{
             visibility: hidden;
@@ -48,8 +79,8 @@
         <br>
         <h4>Here is an example of a filled out issue form that is ready to be added to a list.</h4>
         <picture>
-            <source media="(min-width: 650px)" srcset="addIssue.jpg">
-            <img src="addIssue.jpg" alt="Filled out issue form" style="width:auto;">
+            <source media="(min-width: 650px)" srcset="addIssue.png">
+            <img src="addIssue.png" alt="Filled out issue form" style="width:auto;">
         </picture>
         <p>
             The form above will create an issue form for old tags with a description of its issue found while using it.
