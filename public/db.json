@@ -1,25 +1,4 @@
 {
   "issue": [
-    {
-      "name": "sample",
-      "type": "sad",
-      "description": "",
-      "resolved": "false",
-      "id": 1
-    },
-    {
-      "name": "another",
-      "type": "one",
-      "description": "",
-      "resolved": "false",
-      "id": 2
-    },
-    {
-      "name": "this",
-      "type": "isi",
-      "description": "work",
-      "resolved": "false",
-      "id": 3
-    }
   ]
 }
