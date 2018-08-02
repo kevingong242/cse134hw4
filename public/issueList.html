@@ -41,9 +41,34 @@ firebase.initializeApp(config);
         text-align: center;
     }
     
-    .odd{
-        background-color: lightgray;
+    
+    nav{
+        background-color:#5f5f5f;
+        padding: 10px 0px;
     }
+
+    nav a{
+        color:white;
+        font-weight: bold;
+        text-align: center;
+        padding: 10px;
+        text-decoration: none;
+    }
+
+    a:hover:not(.active) {
+        background-color: darkslategray;
+        color:white;
+    }
+
+    #logOut{
+        visibility: hidden;
+        float: right;
+    }
+
+    .active{
+        background-color: #4CAF50;
+    }
+    
     .fas{
         font-size: 50px;
     }
