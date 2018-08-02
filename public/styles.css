@@ -20,6 +20,11 @@ a:hover:not(.active) {
     color:white;
 }
 
+#logOut{
+    visibility: hidden;
+    float: right;
+}
+
 .active{
     background-color: #4CAF50;
 }

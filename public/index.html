@@ -13,7 +13,22 @@
     <script defer src="/__/firebase/5.2.0/firebase-storage.js"></script>
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyDj7-AH20lUjfB0f-sxHU6wrF6SFP1fHm4",
+        authDomain: "cse134hw4-18f6d.firebaseapp.com",
+        databaseURL: "https://cse134hw4-18f6d.firebaseio.com",
+        projectId: "cse134hw4-18f6d",
+        storageBucket: "cse134hw4-18f6d.appspot.com",
+        messagingSenderId: "396733221695"
+    };
+    firebase.initializeApp(config);
+    </script>
     <base href="index.html">
+    <script src="auth.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css" media="screen">
     <link href="https://fonts.googleapis.com/css?family=Gaegu" rel="stylesheet">
     <style>
@@ -31,6 +46,7 @@
             <a href="#" class="active">Index</a>
             <a href="boiler.html">Boiler</a>
             <a href="issueList.html">List</a>
+            <a id="logOut" onclick="logOut()">Log Out</a>
         </nav>
         <h1 class="colorWords">------- Welcome to Homework 3 -------</h1>
         <h2 class="colorWords">------- Homework 3 is an issue tracker -------</h2>
@@ -38,12 +54,13 @@
     <form>
         Username <br><input type="text" id="signInUser"> Ex: <samp>BigBaller123</samp><br>
         Password <br><input type="password" id="signInPass"><br>
-        <input type="button" id="signInBtn" value="Sign in">
     </form>
-    <p>New to homework 3? <button id="signUpBtn" onclick="signUp()">Create Account</button></p>
-    <div id="signUpArea" style="visibility:visible">
-        Username: <input id="signUpUser" type="text">
-        Password: <input id="signUpPass" type="password">
+    <button id="signInBtn" onclick="signIn()">Sign In</button>
+    <p>New to homework 3? <button id="signUpBtn" onclick="signUpAppear()">Create Account</button></p>
+    <div id="signUpArea" style="visibility:hidden">
+        Username: <input id="signUpUser" type="text"><br>
+        Password: <input id="signUpPass" type="password"><br>
+        <button id="signUpSubmit" onclick="signUp()">Submit</button>
     </div>
 </body>
 </html>
