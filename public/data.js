@@ -168,3 +168,27 @@ function resolveIssue(id, resolved){
         block[id-1].className = "fas fa-times-circle"
     }
 }
+
+//FIREBASE AUTH
+function signIn(){
+    var user = document.getElementById('signInUser');
+    var pass = document.getElementById('signInPass');
+    firebase.auth().signInWithEmailAndPassword(user, pass).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ...
+    });
+}
+
+function signUp(){
+    document.getElementById('signUpArea').style.visibility = "visible";
+    var user = document.getElementById('signUpUser');
+    var pass = document.getElementById('signUpPass');
+    firebase.auth().createUserWithEmailAndPassword(user, pass).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+  // ...
+});
+}
