@@ -11,11 +11,9 @@ function signIn(){
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
-        console.log(errorCode);
-        console.log(errorMessage);
+      window.alert("Error: " + errorMessage);
       // ...
     });
-    console.log("click");
     var logOutBtn = document.getElementById('logOut');
     logOutBtn.style.visibility = "visible";
     //window.location = "issueList.html";
@@ -48,7 +46,9 @@ function logOut(){
 
 firebase.auth().onAuthStateChanged(firebaseUser =>{
     if(firebaseUser){
-        console.log(firebaseUser);
+        console.log("Worked: " + firebaseUser);
+        var user = firebase.auth().currentUser;
+        
     }else{
         console.log("Not logged in!");
     }
