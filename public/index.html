@@ -30,18 +30,20 @@
         <nav>
             <a href="#" class="active">Index</a>
             <a href="boiler.html">Boiler</a>
-            <a href="issueForm.html">Form</a>
             <a href="issueList.html">List</a>
         </nav>
         <h1 class="colorWords">------- Welcome to Homework 3 -------</h1>
         <h2 class="colorWords">------- Homework 3 is an issue tracker -------</h2>
     </header>
     <form>
-        Username <br><input type="text"> Ex: <samp>BigBaller123</samp><br>
-        Password <br><input type="password"><br>
-        <input type="button" onclick="location.href='boiler.html'" value="Sign in">
+        Username <br><input type="text" id="signInUser"> Ex: <samp>BigBaller123</samp><br>
+        Password <br><input type="password" id="signInPass"><br>
+        <input type="button" id="signInBtn" value="Sign in">
     </form>
-    <p>New to homework 3? <a href="signUp.html">Create Account</a></p>
-    <button id="testing" onclick="sayHi()">Button</button>
+    <p>New to homework 3? <button id="signUpBtn" onclick="signUp()">Create Account</button></p>
+    <div id="signUpArea" style="visibility:visible">
+        Username: <input id="signUpUser" type="text">
+        Password: <input id="signUpPass" type="password">
+    </div>
 </body>
 </html>
